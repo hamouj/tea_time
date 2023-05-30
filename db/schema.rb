@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_30_203752) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_30_211721) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -37,10 +37,19 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_30_203752) do
     t.integer "price"
     t.integer "status", default: 0
     t.integer "frequency"
-    t.bigint "tea_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["tea_id"], name: "index_subscriptions_on_tea_id"
+    t.bigint "tea_subscription_id"
+    t.index ["tea_subscription_id"], name: "index_subscriptions_on_tea_subscription_id"
+  end
+
+  create_table "tea_subscriptions", force: :cascade do |t|
+    t.bigint "tea_id", null: false
+    t.bigint "subscription_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["subscription_id"], name: "index_tea_subscriptions_on_subscription_id"
+    t.index ["tea_id"], name: "index_tea_subscriptions_on_tea_id"
   end
 
   create_table "teas", force: :cascade do |t|
@@ -50,9 +59,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_30_203752) do
     t.integer "brew_time"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "tea_subscription_id"
+    t.index ["tea_subscription_id"], name: "index_teas_on_tea_subscription_id"
   end
 
   add_foreign_key "customer_subscriptions", "customers"
   add_foreign_key "customer_subscriptions", "subscriptions"
-  add_foreign_key "subscriptions", "teas"
+  add_foreign_key "subscriptions", "tea_subscriptions"
+  add_foreign_key "tea_subscriptions", "subscriptions"
+  add_foreign_key "tea_subscriptions", "teas"
+  add_foreign_key "teas", "tea_subscriptions"
 end
