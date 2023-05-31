@@ -3,6 +3,6 @@ class ApplicationController < ActionController::API
   rescue_from ActionController::ParameterMissing, with: :validation_error_response
 
   def validation_error_response(error)
-    render json: ErrorSerializer.new(error).validation_error, status: 400
+    render json: ErrorSerializer.new(error).validation_error, status: :bad_request
   end
 end

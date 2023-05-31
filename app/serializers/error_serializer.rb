@@ -9,9 +9,7 @@ class ErrorSerializer
         {
           "status": 400,
           "title": "validation error",
-          "detail": @error.message.split(',').map do |message|
-            message.strip
-          end
+          "detail": @error.message.split(",").map(&:strip)
         }
       ]
     }

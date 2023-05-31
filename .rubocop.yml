@@ -25,3 +25,6 @@ Style/StringLiterals:
 
 Style/SymbolArray:
   EnforcedStyle: brackets
+
+Style/ClassAndModuleChildren:
+  EnforcedStyle: compact
