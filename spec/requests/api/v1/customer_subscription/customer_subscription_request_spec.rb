@@ -14,7 +14,7 @@ describe "Customer Subscription Requests" do
 
         headers = { "CONTENT_TYPE" => "application/json" }
 
-        post "/api/v1/customer_subscription", headers:, params: JSON.generate(customer_subscription_params)
+        post "/api/v1/customer_subscriptions", headers:, params: JSON.generate(customer_subscription_params)
         created_customer_subscription = CustomerSubscription.last
 
         expect(response).to be_successful
@@ -44,7 +44,7 @@ describe "Customer Subscription Requests" do
 
         headers = { "CONTENT_TYPE" => "application/json" }
 
-        patch "/api/v1/customer_subscription", headers:, params: JSON.generate(customer_subscription_params)
+        patch "/api/v1/customer_subscriptions", headers:, params: JSON.generate(customer_subscription_params)
 
         expect(response).to be_successful
         expect(response.status).to eq(200)
@@ -62,7 +62,7 @@ describe "Customer Subscription Requests" do
 
         headers = { "CONTENT_TYPE" => "application/json" }
 
-        patch "/api/v1/customer_subscription", headers:, params: JSON.generate(customer_subscription_params)
+        patch "/api/v1/customer_subscriptions", headers:, params: JSON.generate(customer_subscription_params)
 
         expect(response).to be_successful
         expect(response.status).to eq(200)
@@ -89,7 +89,7 @@ describe "Customer Subscription Requests" do
 
           headers = { "CONTENT_TYPE" => "application/json" }
 
-          post "/api/v1/customer_subscription", headers:, params: JSON.generate(customer_subscription_params)
+          post "/api/v1/customer_subscriptions", headers:, params: JSON.generate(customer_subscription_params)
 
           expect(response).to_not be_successful
           expect(response.status).to eq(400)
@@ -108,7 +108,7 @@ describe "Customer Subscription Requests" do
 
           headers = { "CONTENT_TYPE" => "application/json" }
 
-          post "/api/v1/customer_subscription", headers:, params: JSON.generate(customer_subscription_params)
+          post "/api/v1/customer_subscriptions", headers:, params: JSON.generate(customer_subscription_params)
 
           expect(response).to_not be_successful
           expect(response.status).to eq(400)
@@ -119,7 +119,7 @@ describe "Customer Subscription Requests" do
         end
 
         it "returns an error when the request is empty" do
-          post "/api/v1/customer_subscription"
+          post "/api/v1/customer_subscriptions"
 
           expect(response).to_not be_successful
           expect(response.status).to eq(400)
@@ -139,7 +139,7 @@ describe "Customer Subscription Requests" do
 
           headers = { "CONTENT_TYPE" => "application/json" }
 
-          post "/api/v1/customer_subscription", headers:, params: JSON.generate(customer_subscription_params)
+          post "/api/v1/customer_subscriptions", headers:, params: JSON.generate(customer_subscription_params)
 
           expect(response).to_not be_successful
           expect(response.status).to eq(400)
@@ -157,7 +157,7 @@ describe "Customer Subscription Requests" do
 
           headers = { "CONTENT_TYPE" => "application/json" }
 
-          post "/api/v1/customer_subscription", headers:, params: JSON.generate(customer_subscription_params)
+          post "/api/v1/customer_subscriptions", headers:, params: JSON.generate(customer_subscription_params)
 
           expect(response).to_not be_successful
           expect(response.status).to eq(400)
@@ -177,7 +177,7 @@ describe "Customer Subscription Requests" do
 
           headers = { "CONTENT_TYPE" => "application/json" }
 
-          post "/api/v1/customer_subscription", headers:, params: JSON.generate(customer_subscription_params)
+          post "/api/v1/customer_subscriptions", headers:, params: JSON.generate(customer_subscription_params)
 
           expect(response).to_not be_successful
           expect(response.status).to eq(400)
@@ -205,7 +205,7 @@ describe "Customer Subscription Requests" do
 
           headers = { "CONTENT_TYPE" => "application/json" }
 
-          patch "/api/v1/customer_subscription", headers:, params: JSON.generate(customer_subscription_params)
+          patch "/api/v1/customer_subscriptions", headers:, params: JSON.generate(customer_subscription_params)
 
           expect(response).to_not be_successful
           expect(response.status).to eq(404)
@@ -224,7 +224,7 @@ describe "Customer Subscription Requests" do
 
           headers = { "CONTENT_TYPE" => "application/json" }
 
-          patch "/api/v1/customer_subscription", headers:, params: JSON.generate(customer_subscription_params)
+          patch "/api/v1/customer_subscriptions", headers:, params: JSON.generate(customer_subscription_params)
 
           expect(response).to_not be_successful
           expect(response.status).to eq(404)
@@ -237,7 +237,7 @@ describe "Customer Subscription Requests" do
 
       context 'incomplete/missing params within request' do
         it 'returns an error when the request is empty' do
-          patch "/api/v1/customer_subscription"
+          patch "/api/v1/customer_subscriptions"
 
           expect(response).to_not be_successful
           expect(response.status).to eq(404)
@@ -254,7 +254,7 @@ describe "Customer Subscription Requests" do
 
           headers = { "CONTENT_TYPE" => "application/json" }
 
-          patch "/api/v1/customer_subscription", headers:, params: JSON.generate(customer_subscription_params)
+          patch "/api/v1/customer_subscriptions", headers:, params: JSON.generate(customer_subscription_params)
 
           expect(response).to_not be_successful
           expect(response.status).to eq(404)
