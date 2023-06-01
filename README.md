@@ -6,9 +6,9 @@
 <br />
 <div align="center">
   <a href="https://github.com/hamouj/tea_time">
+  <img src="https://github.com/hamouj/image_repo/assets/114951691/a6fecb11-4b77-480c-834d-0c77cba1a3d2", alt="tea time", width="100">
   </a>
 
-<h3 align="center">Tea Time</h3>
   <p align="center">
     Tea Subscription Service API
     <hr>
@@ -128,12 +128,11 @@ Happy path, sad path, and edge testing were considered and tested. When a reques
 
 <details>
   <summary>Cancel a customer's tea subscription<br>
-  <code>PATCH "/api/v1/random_acts"</code></summary>
+  <code>PATCH "/api/v1/customer_subscriptions/:id"</code></summary>
   Request:
   <pre>
     <code>
 {
-    "id": 12,
     "status": "cancelled"
 }
     </code>
@@ -158,13 +157,55 @@ Happy path, sad path, and edge testing were considered and tested. When a reques
   </pre>
 </details>
 
+<details>
+  <summary>Get a customer's subscriptions(active and cancelled)<br>
+  <code>GET "/api/v1/customers/:id"</code></summary>
+  Response
+  <pre>
+    <code>
+{
+    "data": {
+        "id": "5",
+        "type": "customer",
+        "attributes": {
+            "first_name": "Hailey",
+            "last_name": "Harper",
+            "email": "h@gmail.com",
+            "address": "456 Imaginary St, Las Vegas, NV 45678",
+            "subscriptions": [
+                {
+                    "id": 7,
+                    "title": "Tea Yeah",
+                    "price": 6230,
+                    "status": "live",
+                    "frequency": 2,
+                    "created_at": "2023-06-01T15:43:55.057Z",
+                    "updated_at": "2023-06-01T15:43:55.057Z"
+                },
+                {
+                    "id": 8,
+                    "title": "Pepperminty",
+                    "price": 2310,
+                    "status": "live",
+                    "frequency": 3,
+                    "created_at": "2023-06-01T15:43:55.060Z",
+                    "updated_at": "2023-06-01T15:43:55.060Z"
+                }
+            ]
+        }
+    }
+}
+    </code>
+  </pre>
+</details>
+
 View these endpoints in [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/26085409-38914007-3a2c-4676-8467-e40407f1823d?action=collection%2Ffork&source=rip_markdown&collection-url=entityId%3D26085409-38914007-3a2c-4676-8467-e40407f1823d%26entityType%3Dcollection%26workspaceId%3D1ed95997-2390-4abc-b31e-2cd34f407b2e)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <h2 id="contact">Contributors</h2>
 
-| [<img alt="Jasmine Hamou" width="75" src="https://github.com/hamouj/image_repo/assets/114951691/03d1bbcf-1f28-48d7-98c0-cd38a9c41be1"/>](https://www.linkedin.com/in/jasmine-hamou/) |
+| [<img alt="Jasmine Hamou" width="75%" align="center" src="https://github.com/hamouj/image_repo/assets/114951691/03d1bbcf-1f28-48d7-98c0-cd38a9c41be1"/>](https://www.linkedin.com/in/jasmine-hamou/) |
 | ------------------ | 
 | Jasmine Hamou |
 | Creator |
