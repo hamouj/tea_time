@@ -6,26 +6,31 @@ describe "Customer Requests" do
       before do
         @subscription1 = create(:subscription)
         @subscription2 = create(:subscription)
-        @subscription3 = create(:subscription)
+        @subscription3 = create(:inactive_subscription)
 
-        @customer1 = create(:customer)
-        create(:customer_subscription, customer: @customer1, subscription: @subscription1)
-        create(:customer_subscription, customer: @customer1, subscription: @subscription2, status: 1)
-
-        @customer2 = create(:customer)
-        create(:customer_subscription, customer: @customer2, subscription: @subscription1, status: 1)
-        create(:customer_subscription, customer: @customer2, subscription: @subscription2)
-        create(:customer_subscription, customer: @customer2, subscription: @subscription3)
+        @customer = create(:customer)
+        create(:customer_subscription, customer: @customer, subscription: @subscription1, status: 1)
+        create(:customer_subscription, customer: @customer, subscription: @subscription2)
+        create(:customer_subscription, customer: @customer, subscription: @subscription3)
       end
 
-      it 'returns a customer subscriptions(active and cancelled)' do
-        get "/api/v1/customers/#{@customer1.id}"
+      it "returns a customer's subscriptions(active and cancelled)" do
+        get "/api/v1/customers/#{@customer.id}"
 
-        expect(result).to be_successful
-        expect(result.status).to eq(200)
+        expect(response).to be_successful
+        expect(response.status).to eq(200)
 
         response_body = JSON.parse(response.body, symbolize_names: true)
-        require 'pry'; binding.pry
+
+        #for the customer, subscription1 is cancelled and subscription 2 is active, both are included in response
+        #subscription3 is inactive and not included in results
+        expect(response_body.dig(:data, 0, :type)).to eq("subscription")
+        expect(response_body.dig(:data, 0, :attributes, :title)).to eq(@subscription1.title)
+        expect(response_body.dig(:data, 1, :attributes, :title)).to eq(@subscription2.title)
+        expect(response_body.dig(:data, 0, :attributes, :price)).to eq(@subscription1.price)
+        expect(response_body.dig(:data, 1, :attributes, :price)).to eq(@subscription2.price)
+        expect(response_body.dig(:data, 0, :attributes, :frequency)).to eq(@subscription1.frequency)
+        expect(response_body.dig(:data, 1, :attributes, :frequency)).to eq(@subscription2.frequency)
       end
     end
   end
