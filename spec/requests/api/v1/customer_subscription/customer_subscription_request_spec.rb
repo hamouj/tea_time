@@ -29,14 +29,14 @@ describe "Customer Subscription Requests" do
       end
     end
 
-    describe 'cancel customer subscription' do
+    describe "cancel customer subscription" do
       before do
         @customer = create(:customer)
         @subscription = create(:subscription)
         @customer_subscription = create(:customer_subscription, customer: @customer, subscription: @subscription)
       end
 
-      it 'cancels a customer subscription and returns the updated resource' do
+      it "cancels a customer subscription and returns the updated resource" do
         customer_subscription_params = {
           id: @customer_subscription.id,
           status: "cancelled"
@@ -55,7 +55,7 @@ describe "Customer Subscription Requests" do
         expect(response_body.dig(:data, :attributes, :status)).to eq("cancelled")
       end
 
-      it 'returns the unchanged resource when the status is not sent' do
+      it "returns the unchanged resource when the status is not sent" do
         customer_subscription_params = {
           id: @customer_subscription.id
         }
@@ -189,15 +189,15 @@ describe "Customer Subscription Requests" do
       end
     end
 
-    describe 'cancel customer subscription' do
+    describe "cancel customer subscription" do
       before do
         @customer = create(:customer)
         @subscription = create(:subscription)
         @customer_subscription = create(:customer_subscription, customer: @customer, subscription: @subscription)
       end
 
-      context 'customer subscription ID does not exist' do
-        it 'returns an error when the customer subscription ID does not exist' do
+      context "customer subscription ID does not exist" do
+        it "returns an error when the customer subscription ID does not exist" do
           customer_subscription_params = {
             id: 1267894587,
             status: "cancelled"
@@ -216,7 +216,7 @@ describe "Customer Subscription Requests" do
           expect(response_body.dig(:errors, 0, :detail)).to eq("Couldn't find CustomerSubscription with 'id'=1267894587")
         end
 
-        it 'returns an error when the customer subscription ID contains letters/symbols' do
+        it "returns an error when the customer subscription ID contains letters/symbols" do
           customer_subscription_params = {
             id: "347A&jhd",
             status: "cancelled"
@@ -235,8 +235,8 @@ describe "Customer Subscription Requests" do
         end
       end
 
-      context 'incomplete/missing params within request' do
-        it 'returns an error when the request is empty' do
+      context "incomplete/missing params within request" do
+        it "returns an error when the request is empty" do
           patch "/api/v1/customer_subscriptions"
 
           expect(response).to_not be_successful
@@ -247,7 +247,7 @@ describe "Customer Subscription Requests" do
           expect(response_body.dig(:errors, 0, :detail)).to eq("Couldn't find CustomerSubscription without an ID")
         end
 
-        it 'returns an error when the request is missing the customer subscription ID' do
+        it "returns an error when the request is missing the customer subscription ID" do
           customer_subscription_params = {
             status: "cancelled"
           }
