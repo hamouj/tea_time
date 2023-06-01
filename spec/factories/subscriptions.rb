@@ -5,10 +5,10 @@ FactoryBot.define do
     status { "active" }
     frequency { Faker::Number.between(from: 1, to: 5) }
 
-    trait :cancelled do
-      status { "cancelled" }
+    trait :inactive do
+      status { "inactive" }
     end
 
-    factory :cancelled_subscription, traits: [:cancelled]
+    factory :inactive_subscription, traits: [:inactive]
   end
 end
