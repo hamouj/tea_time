@@ -1,7 +1,6 @@
 class Api::V1::CustomersController < ApplicationController
   def show
     customer = Customer.find(params[:id])
-    subscriptions = customer.live_subscriptions
-    render json: SubscriptionSerializer.new(subscriptions)
+    render json: CustomerSerializer.new(customer), status: :ok
   end
 end
