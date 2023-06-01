@@ -38,13 +38,12 @@ describe "Customer Subscription Requests" do
 
       it "cancels a customer subscription and returns the updated resource" do
         customer_subscription_params = {
-          id: @customer_subscription.id,
           status: "cancelled"
         }
 
         headers = { "CONTENT_TYPE" => "application/json" }
 
-        patch "/api/v1/customer_subscriptions", headers:, params: JSON.generate(customer_subscription_params)
+        patch "/api/v1/customer_subscriptions/#{@customer_subscription.id}", headers:, params: JSON.generate(customer_subscription_params)
 
         expect(response).to be_successful
         expect(response.status).to eq(200)
@@ -55,14 +54,14 @@ describe "Customer Subscription Requests" do
         expect(response_body.dig(:data, :attributes, :status)).to eq("cancelled")
       end
 
-      it "returns the unchanged resource when the status is not sent" do
+      it "returns the unchanged resource when the sent status is the same as current status" do
         customer_subscription_params = {
-          id: @customer_subscription.id
+          status: "active"
         }
 
         headers = { "CONTENT_TYPE" => "application/json" }
 
-        patch "/api/v1/customer_subscriptions", headers:, params: JSON.generate(customer_subscription_params)
+        patch "/api/v1/customer_subscriptions/#{@customer_subscription.id}", headers:, params: JSON.generate(customer_subscription_params)
 
         expect(response).to be_successful
         expect(response.status).to eq(200)
@@ -98,7 +97,7 @@ describe "Customer Subscription Requests" do
 
           expect(response_body.dig(:errors, 0, :status)).to eq(400)
           expect(response_body.dig(:errors, 0, :title)).to eq("validation error")
-          expect(response_body.dig(:errors, 0, :detail, 0)).to eq("Validation failed: Subscription must exist")
+          expect(response_body.dig(:errors, 0, :detail)).to eq("Validation failed: Subscription must exist")
         end
 
         it "returns an error when the request is missing a customer id" do
@@ -115,7 +114,7 @@ describe "Customer Subscription Requests" do
 
           response_body = JSON.parse(response.body, symbolize_names: true)
 
-          expect(response_body.dig(:errors, 0, :detail, 0)).to eq("Validation failed: Customer must exist")
+          expect(response_body.dig(:errors, 0, :detail)).to eq("Validation failed: Customer must exist")
         end
 
         it "returns an error when the request is empty" do
@@ -126,7 +125,7 @@ describe "Customer Subscription Requests" do
 
           response_body = JSON.parse(response.body, symbolize_names: true)
 
-          expect(response_body.dig(:errors, 0, :detail, 0)).to eq("param is missing or the value is empty: customer_subscription")
+          expect(response_body.dig(:errors, 0, :detail)).to eq("param is missing or the value is empty: customer_subscription")
         end
       end
 
@@ -146,7 +145,7 @@ describe "Customer Subscription Requests" do
 
           response_body = JSON.parse(response.body, symbolize_names: true)
 
-          expect(response_body.dig(:errors, 0, :detail, 0)).to eq("Validation failed: Customer must exist")
+          expect(response_body.dig(:errors, 0, :detail)).to eq("Validation failed: Customer must exist")
         end
 
         it "returns an error when the customer does not exist" do
@@ -164,7 +163,7 @@ describe "Customer Subscription Requests" do
 
           response_body = JSON.parse(response.body, symbolize_names: true)
 
-          expect(response_body.dig(:errors, 0, :detail, 0)).to eq("Validation failed: Subscription must exist")
+          expect(response_body.dig(:errors, 0, :detail)).to eq("Validation failed: Subscription must exist")
         end
       end
 
@@ -184,7 +183,7 @@ describe "Customer Subscription Requests" do
 
           response_body = JSON.parse(response.body, symbolize_names: true)
 
-          expect(response_body.dig(:errors, 0, :detail, 0)).to eq("Validation failed: Subscription must exist")
+          expect(response_body.dig(:errors, 0, :detail)).to eq("Validation failed: Subscription must exist")
         end
       end
     end
@@ -199,13 +198,12 @@ describe "Customer Subscription Requests" do
       context "customer subscription ID does not exist" do
         it "returns an error when the customer subscription ID does not exist" do
           customer_subscription_params = {
-            id: 1267894587,
             status: "cancelled"
           }
 
           headers = { "CONTENT_TYPE" => "application/json" }
 
-          patch "/api/v1/customer_subscriptions", headers:, params: JSON.generate(customer_subscription_params)
+          patch "/api/v1/customer_subscriptions/1267894587", headers:, params: JSON.generate(customer_subscription_params)
 
           expect(response).to_not be_successful
           expect(response.status).to eq(404)
@@ -218,13 +216,12 @@ describe "Customer Subscription Requests" do
 
         it "returns an error when the customer subscription ID contains letters/symbols" do
           customer_subscription_params = {
-            id: "347A&jhd",
             status: "cancelled"
           }
 
           headers = { "CONTENT_TYPE" => "application/json" }
 
-          patch "/api/v1/customer_subscriptions", headers:, params: JSON.generate(customer_subscription_params)
+          patch "/api/v1/customer_subscriptions/347A&jhd", headers:, params: JSON.generate(customer_subscription_params)
 
           expect(response).to_not be_successful
           expect(response.status).to eq(404)
@@ -237,31 +234,14 @@ describe "Customer Subscription Requests" do
 
       context "incomplete/missing params within request" do
         it "returns an error when the request is empty" do
-          patch "/api/v1/customer_subscriptions"
+          patch "/api/v1/customer_subscriptions/#{@customer_subscription.id}"
 
           expect(response).to_not be_successful
-          expect(response.status).to eq(404)
+          expect(response.status).to eq(400)
 
           response_body = JSON.parse(response.body, symbolize_names: true)
 
-          expect(response_body.dig(:errors, 0, :detail)).to eq("Couldn't find CustomerSubscription without an ID")
-        end
-
-        it "returns an error when the request is missing the customer subscription ID" do
-          customer_subscription_params = {
-            status: "cancelled"
-          }
-
-          headers = { "CONTENT_TYPE" => "application/json" }
-
-          patch "/api/v1/customer_subscriptions", headers:, params: JSON.generate(customer_subscription_params)
-
-          expect(response).to_not be_successful
-          expect(response.status).to eq(404)
-
-          response_body = JSON.parse(response.body, symbolize_names: true)
-
-          expect(response_body.dig(:errors, 0, :detail)).to eq("Couldn't find CustomerSubscription without an ID")
+          expect(response_body.dig(:errors, 0, :detail)).to eq("param is missing or the value is empty: customer_subscription")
         end
       end
     end
