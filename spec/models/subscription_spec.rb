@@ -7,6 +7,6 @@ RSpec.describe Subscription, type: :model do
   end
 
   describe "enums" do
-    it { should define_enum_for(:status).with_values(["active", "inactive"]) }
+    it { should define_enum_for(:status).with_values(["live", "inactive"]) }
   end
 end
