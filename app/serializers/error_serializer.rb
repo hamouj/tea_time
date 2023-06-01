@@ -14,4 +14,16 @@ class ErrorSerializer
       ]
     }
   end
+
+  def record_not_found_error
+    {
+      "errors": [
+        {
+          "status": 404,
+          "title": "record not found",
+          "detail": @error.message
+        }
+      ]
+    }
+  end
 end
