@@ -6,12 +6,13 @@
 <br />
 <div align="center">
   <a href="https://github.com/hamouj/tea_time">
-  <img src="https://github.com/hamouj/image_repo/assets/114951691/a6fecb11-4b77-480c-834d-0c77cba1a3d2", alt="tea time", width="100">
+  <img src="https://github.com/hamouj/image_repo/assets/114951691/a6fecb11-4b77-480c-834d-0c77cba1a3d2", alt="tea time", width="20">
   </a>
 
-  <p align="center">
-    Tea Subscription Service API
+  <h3 align="center">
+    Tea Subscription Service API</h3>
     <hr>
+   <p align="center">
     This API provides information about customer tea subscriptions and fulfills the requirements for the Turing School of Software & Design take-home challenge.
   </p>
 </div>
@@ -205,11 +206,17 @@ View these endpoints in [![Run in Postman](https://run.pstmn.io/button.svg)](htt
 
 <h2 id="contact">Contributors</h2>
 
-| [<img alt="Jasmine Hamou" width="75%" align="center" src="https://github.com/hamouj/image_repo/assets/114951691/03d1bbcf-1f28-48d7-98c0-cd38a9c41be1"/>](https://www.linkedin.com/in/jasmine-hamou/) |
-| ------------------ | 
-| Jasmine Hamou |
-| Creator |
-| [GitHub](https://github.com/hamouj) |
-|  [LinkedIn](https://www.linkedin.com/in/jasmine-hamou/) |
+<table>
+  <tr>
+  <img alt="Jasmine Hamou" width="25%" src="https://github.com/hamouj/image_repo/assets/114951691/03d1bbcf-1f28-48d7-98c0-cd38a9c41be1"/>
+  </tr>
+  <tr>
+    <h3>Jasmine Hamou</h3>
+  </tr>
+  <tr>
+    <h4><a href="https://github.com/hamouj">GitHub</a></h4>
+    <h4><a href="https://www.linkedin.com/in/jasmine-hamou/">LinkedIn</a></h4>
+  </tr>
+</table>
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
