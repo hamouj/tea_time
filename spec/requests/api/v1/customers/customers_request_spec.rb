@@ -26,15 +26,14 @@ describe "Customer Requests" do
 
         # for the customer, subscription1 is cancelled and subscription 2 is active, both are included in response
         # subscription3 is inactive and not included in results
-        expect(response_body.dig(:data, 0, :type)).to eq("subscription")
-        expect(response_body.dig(:data, 0, :attributes, :title)).to eq(@subscription1.title)
-        expect(response_body.dig(:data, 1, :attributes, :title)).to eq(@subscription2.title)
-        expect(response_body.dig(:data, 0, :attributes, :price)).to eq(@subscription1.price)
-        expect(response_body.dig(:data, 1, :attributes, :price)).to eq(@subscription2.price)
-        expect(response_body.dig(:data, 0, :attributes, :frequency)).to eq(@subscription1.frequency)
-        expect(response_body.dig(:data, 1, :attributes, :frequency)).to eq(@subscription2.frequency)
-        expect(response_body.dig(:data, 0, :attributes, :status)).to eq("live")
-        expect(response_body.dig(:data, 1, :attributes, :status)).to eq("live")
+        expect(response_body.dig(:data, :attributes, :subscriptions, 0, :title)).to eq(@subscription1.title)
+        expect(response_body.dig(:data, :attributes, :subscriptions, 1, :title)).to eq(@subscription2.title)
+        expect(response_body.dig(:data, :attributes, :subscriptions, 0, :price)).to eq(@subscription1.price)
+        expect(response_body.dig(:data, :attributes, :subscriptions, 1, :price)).to eq(@subscription2.price)
+        expect(response_body.dig(:data, :attributes, :subscriptions, 0, :frequency)).to eq(@subscription1.frequency)
+        expect(response_body.dig(:data, :attributes, :subscriptions, 1, :frequency)).to eq(@subscription2.frequency)
+        expect(response_body.dig(:data, :attributes, :subscriptions, 0, :status)).to eq("live")
+        expect(response_body.dig(:data, :attributes, :subscriptions, 1, :status)).to eq("live")
       end
 
       it "returns an empty array when a customer has no subscriptions" do
@@ -45,7 +44,7 @@ describe "Customer Requests" do
 
         response_body = JSON.parse(response.body, symbolize_names: true)
 
-        expect(response_body[:data]).to eq([])
+        expect(response_body.dig(:data, :attributes, :subscriptions)).to eq([])
       end
 
       it "returns a single subscription in an array" do
@@ -58,10 +57,10 @@ describe "Customer Requests" do
 
         response_body = JSON.parse(response.body, symbolize_names: true)
 
-        expect(response_body.dig(:data, 0, :attributes, :title)).to eq(@subscription2.title)
-        expect(response_body.dig(:data, 0, :attributes, :price)).to eq(@subscription2.price)
-        expect(response_body.dig(:data, 0, :attributes, :frequency)).to eq(@subscription2.frequency)
-        expect(response_body.dig(:data, 0, :attributes, :status)).to eq("live")
+        expect(response_body.dig(:data, :attributes, :subscriptions, 0, :title)).to eq(@subscription2.title)
+        expect(response_body.dig(:data, :attributes, :subscriptions, 0, :price)).to eq(@subscription2.price)
+        expect(response_body.dig(:data, :attributes, :subscriptions, 0, :frequency)).to eq(@subscription2.frequency)
+        expect(response_body.dig(:data, :attributes, :subscriptions, 0, :status)).to eq("live")
       end
     end
   end
