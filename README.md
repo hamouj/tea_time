@@ -6,14 +6,15 @@
 <br />
 <div align="center">
   <a href="https://github.com/hamouj/tea_time">
-  <img src="https://github.com/hamouj/image_repo/assets/114951691/a6fecb11-4b77-480c-834d-0c77cba1a3d2", alt="tea time", width="20">
+  <img src="https://github.com/hamouj/image_repo/assets/114951691/a6fecb11-4b77-480c-834d-0c77cba1a3d2", alt="tea time">
   </a>
 
   <h3 align="center">
     Tea Subscription Service API</h3>
     <hr>
    <p align="center">
-    This API provides information about customer tea subscriptions and fulfills the requirements for the Turing School of Software & Design take-home challenge.
+    This API provides information about customer tea subscriptions and fulfills the requirements for the Turing School of Software & Design 
+     <a href="https://mod4.turing.edu/projects/take_home/take_home_be">take-home challenge</a>
   </p>
 </div>
 <hr>
@@ -33,6 +34,9 @@
     </li>
     <li>
     <a href="#endpoints">Endpoints</a>
+    </li>
+    <li> 
+    <a href="#future">Future Iterations</a>
     </li>
     <li> 
     <a href="#contact">Contributors</a>
@@ -203,6 +207,15 @@ Happy path, sad path, and edge testing were considered and tested. When a reques
 View these endpoints in [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/26085409-38914007-3a2c-4676-8467-e40407f1823d?action=collection%2Ffork&source=rip_markdown&collection-url=entityId%3D26085409-38914007-3a2c-4676-8467-e40407f1823d%26entityType%3Dcollection%26workspaceId%3D1ed95997-2390-4abc-b31e-2cd34f407b2e)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<h2 id="future">Future Iterations</h2>
+
+<p>To complete basic functionality, an additional endpoint would be created that would return all live subscriptions and the teas included within each subscription. This would allow the frontend to display all current subscriptions to users.<br>
+  <code>GET "/api/v1/subscriptions"</code></p>
+ 
+ <p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+Response:
 
 <h2 id="contact">Contributors</h2>
 
