@@ -1,8 +1,9 @@
 Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
-      resources :customer_subscriptions, only: [:create, :update]
-      resources :customers, only: [:show]
+      resources :customers, only: [:show] do
+        resources :subscriptions, only: [:create, :update], controller: 'customer/subscriptions'
+      end
     end
   end
 end
