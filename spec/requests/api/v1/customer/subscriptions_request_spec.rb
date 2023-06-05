@@ -177,8 +177,8 @@ describe "Customer Subscription Requests" do
         end
       end
 
-      context 'inactive subscription' do
-        it 'returns an error when the subscription is inactive' do
+      context "inactive subscription" do
+        it "returns an error when the subscription is inactive" do
           subscription2 = create(:inactive_subscription)
 
           customer_subscription_params = {
@@ -279,7 +279,7 @@ describe "Customer Subscription Requests" do
 
         it "returns an error when the customer subscription does not exist" do
           subscription2 = create(:subscription)
-          
+
           customer_subscription_params = {
             status: "cancelled"
           }
