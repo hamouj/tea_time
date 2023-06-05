@@ -1,6 +1,6 @@
 class ErrorSerializer
   def initialize(error)
-    @error = error
+    @error = error.message
   end
 
   def validation_error
@@ -9,7 +9,7 @@ class ErrorSerializer
         {
           "status": 400,
           "title": "validation error",
-          "detail": @error.message
+          "detail": @error
         }
       ]
     }
@@ -21,7 +21,7 @@ class ErrorSerializer
         {
           "status": 404,
           "title": "record not found",
-          "detail": @error.message
+          "detail": @error
         }
       ]
     }
