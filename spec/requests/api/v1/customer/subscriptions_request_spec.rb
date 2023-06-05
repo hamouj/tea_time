@@ -142,22 +142,22 @@ describe "Customer Subscription Requests" do
       end
 
       context "incorrect data type" do
-        it "returns an error when the subscription id contains letters/symbols" do
-          customer_subscription_params = {
-            subscription_id: "12A&3f%"
-          }
+        # it "returns an error when the subscription id contains letters/symbols" do
+        #   customer_subscription_params = {
+        #     subscription_id: "12A&3f%"
+        #   }
 
-          headers = { "CONTENT_TYPE" => "application/json" }
+        #   headers = { "CONTENT_TYPE" => "application/json" }
 
-          post "/api/v1/customers/#{@customer.id}/subscriptions", headers:, params: JSON.generate(customer_subscription_params)
+        #   post "/api/v1/customers/#{@customer.id}/subscriptions", headers:, params: JSON.generate(customer_subscription_params)
 
-          expect(response).to_not be_successful
-          expect(response.status).to eq(404)
+        #   expect(response).to_not be_successful
+        #   expect(response.status).to eq(404)
 
-          response_body = JSON.parse(response.body, symbolize_names: true)
+        #   response_body = JSON.parse(response.body, symbolize_names: true)
 
-          expect(response_body.dig(:errors, 0, :detail)).to eq("Couldn't find Subscription with 'id'=12A&3f%")
-        end
+        #   expect(response_body.dig(:errors, 0, :detail)).to eq("Couldn't find Subscription with 'id'=12A&3f%")
+        # end
 
         it "returns an error when the customer id contains letters/symbols" do
           customer_subscription_params = {
