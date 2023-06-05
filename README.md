@@ -39,7 +39,7 @@
     <a href="#future">Future Iterations</a>
     </li>
     <li> 
-    <a href="#contact">Contributors</a>
+    <a href="#contact">Developer</a>
     </li>
   </ol>
 </details>
@@ -101,12 +101,11 @@ Happy path, sad path, and edge testing were considered and tested. When a reques
 
 <details>
   <summary>Subscribe a customer to a tea subscription<br>
-  <code>POST "/api/v1/customer_subscription"</code></summary>
+  <code>POST "/api/v1/customers/:id/subscriptions"</code></summary>
   Request:
   <pre>
     <code>
 {
-  "customer_id": 1
    "subscription_id": 2
 }
     </code>
@@ -117,10 +116,10 @@ Happy path, sad path, and edge testing were considered and tested. When a reques
     <code>
 {
     "data": {
-        "id": "12",
+        "id": "16",
         "type": "customer_subscription",
         "attributes": {
-            "id": 12,
+            "id": 16,
             "customer_id": 4,
             "subscription_id": 6,
             "status": "active"
@@ -133,7 +132,7 @@ Happy path, sad path, and edge testing were considered and tested. When a reques
 
 <details>
   <summary>Cancel a customer's tea subscription<br>
-  <code>PATCH "/api/v1/customer_subscriptions/:id"</code></summary>
+  <code>PATCH "/api/v1/customers/:customer_id/subscriptions/:id"</code></summary>
   Request:
   <pre>
     <code>
@@ -148,10 +147,10 @@ Happy path, sad path, and edge testing were considered and tested. When a reques
     <code>
 {
     "data": {
-        "id": "12",
+        "id": "7",
         "type": "customer_subscription",
         "attributes": {
-            "id": 12,
+            "id": 7,
             "customer_id": 4,
             "subscription_id": 6,
             "status": "cancelled"
@@ -215,9 +214,7 @@ View these endpoints in [![Run in Postman](https://run.pstmn.io/button.svg)](htt
  
  <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-Response:
-
-<h2 id="contact">Contributors</h2>
+<h2 id="contact">Developer</h2>
 
 <table>
   <tr>
